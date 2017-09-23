@@ -1,5 +1,6 @@
 ---
 title: Webオペレーション研修、そして夏季休暇
+date: 2016-08-09 23:45:52
 categories:
   - 技術
 tags:

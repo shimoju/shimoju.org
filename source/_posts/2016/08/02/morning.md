@@ -1,5 +1,6 @@
 ---
 title: 朝に弱い
+date: 2016-08-02 23:43:20
 categories:
   - 日記
 tags:

@@ -1,5 +1,6 @@
 ---
 title: 日記復帰〜シン・ゴジラ〜BBQ〜自宅勤務
+date: 2016-08-23 23:36:40
 categories:
   - 日記
 tags:

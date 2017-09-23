@@ -1,5 +1,6 @@
 ---
 title: 3回目のシン・ゴジラはIMAXで
+date: 2016-08-29 23:22:56
 categories:
   - 日記
 tags:

@@ -1,5 +1,6 @@
 ---
 title: PASMOをオートチャージにした
+date: 2016-08-13 23:44:02
 categories:
   - 日記
 tags:

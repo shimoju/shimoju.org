@@ -1,5 +1,6 @@
 ---
 title: 内定者が来た
+date: 2016-08-25 23:59:22
 categories:
   - 日記
 tags:

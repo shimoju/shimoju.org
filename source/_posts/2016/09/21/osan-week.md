@@ -1,5 +1,6 @@
 ---
 title: 研修で1週間でWebサービスをつくった話
+date: 2016-09-21 19:00:32
 categories:
   - 技術
 tags:

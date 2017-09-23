@@ -1,5 +1,6 @@
 ---
 title: 友達が家に来た
+date: 2016-08-10 23:45:27
 categories:
   - 日記
 tags:

@@ -1,5 +1,6 @@
 ---
 title: 社会復帰するぞ
+date: 2016-08-17 22:42:23
 categories:
   - 日記
 tags:

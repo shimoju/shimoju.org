@@ -1,5 +1,6 @@
 ---
 title: BGMには困らない
+date: 2016-08-14 23:06:30
 categories:
   - 日記
 tags:
