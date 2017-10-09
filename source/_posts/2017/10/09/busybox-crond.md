@@ -62,9 +62,7 @@ Usage: crond -fbS -l N -L LOGFILE -c DIR
 
 ### ログレベル
 
-ログレベルが0から8まであってよくわからなかったのでソースを読んだところ、
-
-https://git.busybox.net/busybox/tree/miscutils/crond.c#n171
+ログレベルが0から8まであってよくわからなかったので[ソース](https://git.busybox.net/busybox/tree/miscutils/crond.c#n171)を読んだところ、
 
 ```c
 /* Log levels:
