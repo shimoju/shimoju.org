@@ -1,5 +1,6 @@
 ---
 title: 新卒エンジニア研修の座学でImageMagickと画像加工の話をした
+date: 2017-10-30 00:41:38
 categories:
   - 技術
 tags:
