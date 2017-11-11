@@ -1,5 +1,6 @@
 ---
 title: Herokuはスケーラブルなアプリ養成ギプス
+date: 2017-11-11 22:39:05
 categories:
   - 技術
 tags:
