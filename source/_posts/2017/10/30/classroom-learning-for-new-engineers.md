@@ -17,7 +17,7 @@ tags:
 
 私は研修担当者をやっていて座学をお願いする立場ですが、自分でもやってみたかったので立候補しました。
 
-資料はこちらです。「ImageMagick実践入門 画像加工サーバを作ってみよう」と題して、実際にコマンドやコードを書きながら、ImageMagickを使った画像加工と、簡単な画像加工サーバーをGo言語で実装していきます。
+資料はこちらです。「[ImageMagick実践入門 画像加工サーバを作ってみよう](https://speakerdeck.com/shimoju/imagemagick-and-image-server)」と題して、実際にコマンドやコードを書きながら、ImageMagickを使った画像加工と、簡単な画像加工サーバーをGo言語で実装していきます。
 
 <script async class="speakerdeck-embed" data-id="22ab654b18c94eb9bb92314459d122f7" data-ratio="1.77777777777778" src="//speakerdeck.com/assets/embed.js"></script>
 
