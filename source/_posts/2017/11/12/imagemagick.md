@@ -122,13 +122,13 @@ $ identify -format '%wx%h %f\n' *.jpg | grep -v 800x533
 
 ### 回転 (rotate)
 
-`-rotate`で指定した角度に回転する
+`-rotate`で指定した角度回転する
 
 ```shell-session
 $ convert -rotate 90 original.jpg rotate.jpg
 ```
 
--上下反転
+上下反転
 
 ```shell-session
 $ convert -flip original.jpg flip.jpg
