@@ -224,7 +224,7 @@ $ convert -background black -gravity center \
 ```
 
 余白の色は`-background`で指定する
-PNG(透過が扱えるフォーマット)であれば`transparent`で透過できる
+PNG(透過が扱えるフォーマット)であれば、`-background transparent`で透過できる
 
 ```shell-session
 $ convert -background transparent -gravity north \
