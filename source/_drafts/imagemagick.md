@@ -15,8 +15,8 @@ tags:
 - メジャーからマイナーまでさまざまな画像形式に対応
   - 機能が多すぎて脆弱性もたびたび発見されるくらい…
 - Cで実装され、多くの言語でバインディングがある
-  - Ruby：rmagick, mini_magick gem
-  - PHP：Imagick拡張ライブラリ など
+  - Ruby：[rmagick](https://github.com/rmagick/rmagick), [mini_magick](https://github.com/minimagick/minimagick) gem
+  - PHP：[Imagick拡張モジュール](http://php.net/manual/ja/book.imagick.php)
 
 ## インストール
 
@@ -33,9 +33,9 @@ $ sudo yum -y install ImageMagick
 
 ## コマンド
 
-- imagemagickというコマンドはない(!)
-- 機能ごとにconvertやidentifyなどのコマンドにわかれている
-  - ただし、ImageMagick 7からはすべてmagickコマンドへのシンボリックリンクになっている
+- `imagemagick`というコマンドはない(!)
+- 機能ごとに`convert`や`identify`などのコマンドにわかれている
+  - ただし、ImageMagick 7からはすべて`magick`コマンドへのシンボリックリンクになっている
 
 ### ImageMagick 6 (Ubuntu 16.04)
 
@@ -78,15 +78,14 @@ lrwxr-xr-x  1 shimoju  admin     6B 10  7 21:02 stream -> magick
 ## identify
 
 - 画像の情報を出力できる
-- サイズをさっと知りたいときとか、
-- 大量の画像の中からサイズが違うものを探したりとかに便利
+- サイズをさっと知りたいときとか、大量の画像の中からサイズが違うものを探したりとかに便利
+- フォーマット文字列はこちら参照：[Format and Print Image Properties @ ImageMagick](https://www.imagemagick.org/script/escape.php)
 
 ```shell-session
 $ identify *.jpg
 original.jpg JPEG 800x533 800x533+0+0 8-bit sRGB 104823B 0.000u 0:00.000
 resize.jpg JPEG 400x267 400x267+0+0 8-bit sRGB 37116B 0.000u 0:00.000
 
-フォーマット文字列はここらへん参照：https://www.imagemagick.org/script/escape.php
 $ identify -format '{"width": %w, "height": %h}' *.jpg | jq
 {
   "width": 800,
@@ -100,7 +99,7 @@ $ identify -format '%wx%h %f\n' *.jpg | grep -v 800x533
 ## convert
 
 - さまざまな画像加工を行える、ImageMagickのメインコマンド
-- 適当な画像をoriginal.jpgとして用意しておきます
+- 適当な画像を`original.jpg`として用意しておきます
 
 ### 回転 (rotate)
 
@@ -211,11 +210,10 @@ $ convert original.jpg lgtm.png -gravity center -geometry +150+50 \
 #### 描画モード (blend mode)
 
 - 重ねられた画像をどのように合成するかを指定できる
-  - http://imagemagick.rulez.jp/archives/672
+  - 参考：[画像の結合１（重ね合わせ） – Imagemagickの使い方日本語マニュアル](http://imagemagick.rulez.jp/archives/672)
 - Photoshopなどの画像編集ソフトにあるものと同様
-- 実際どんな計算で算出されるかはソースを読めばわかる…が、感覚をつかむにはGIMPのドキュメントがわかりやすい
-  - https://docs.gimp.org/2.8/ja/gimp-concepts-layer-modes.html
-- 例）乗算：合成画像の色 = 上側の色 * 下側の色 / 255
+- 実際どんな計算で算出されるかはソースを読めばわかる…が、感覚をつかむには[GIMPのドキュメント](https://docs.gimp.org/2.8/ja/gimp-concepts-layer-modes.html)がわかりやすい
+  - たとえば乗算は：合成画像の色 = 上側の色 * 下側の色 / 255
 
 ```shell-session
 -composeで描画モードを指定する
