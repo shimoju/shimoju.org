@@ -18,17 +18,25 @@ tags:
 - Cで実装され、多くの言語でバインディングがある
   - Ruby：[rmagick](https://github.com/rmagick/rmagick), [mini_magick](https://github.com/minimagick/minimagick) gem
   - PHP：[Imagick拡張モジュール](http://php.net/manual/ja/book.imagick.php)
+  - Go：[gographics/imagick](https://github.com/gographics/imagick)
 
 ## インストール
 
-```shell-session
 Mac Homebrew
+
+```shell-session
 $ brew install imagemagick
+```
 
 Debian / Ubuntu
+
+```shell-session
 $ sudo apt-get install -y imagemagick
+```
 
 CentOS
+
+```shell-session
 $ sudo yum -y install ImageMagick
 ```
 
@@ -58,6 +66,8 @@ total 88K
 
 ### ImageMagick 7 (Mac Homebrew)
 
+`magick`コマンドへのシンボリックリンクになっていることがわかる
+
 ```shell-session
 $ ls -Alh /usr/local/Cellar/imagemagick/7.0.7-7/bin | grep -v config
 total 64
@@ -86,13 +96,21 @@ lrwxr-xr-x  1 shimoju  admin     6B 10  7 21:02 stream -> magick
 $ identify *.jpg
 original.jpg JPEG 800x533 800x533+0+0 8-bit sRGB 104823B 0.000u 0:00.000
 resize.jpg JPEG 400x267 400x267+0+0 8-bit sRGB 37116B 0.000u 0:00.000
+```
 
+JSON形式で出力して`jq`に食わせる
+
+```shell-session
 $ identify -format '{"width": %w, "height": %h}' *.jpg | jq
 {
   "width": 800,
   "height": 533
 }
+```
 
+`grep -v`で指定のサイズではない画像を抽出
+
+```shell-session
 $ identify -format '%wx%h %f\n' *.jpg | grep -v 800x533
 200x200 crop.jpg
 ```
@@ -104,80 +122,111 @@ $ identify -format '%wx%h %f\n' *.jpg | grep -v 800x533
 
 ### 回転 (rotate)
 
-```shell-session
-回転
-$ convert -rotate 90 original.jpg rotate.jpg
+`-rotate`で指定した角度に回転する
 
-上下反転
+```shell-session
+$ convert -rotate 90 original.jpg rotate.jpg
+```
+
+-上下反転
+
+```shell-session
 $ convert -flip original.jpg flip.jpg
+```
 
 左右反転
+
+```shell-session
 $ convert -flop original.jpg flop.jpg
+```
 
 上下左右反転
+
+```shell-session
 $ convert -flip -flop original.jpg flipflop.jpg
 ```
 
 ### サンプル (sample)
 
-```shell-session
 ピクセルを間引く
+
+```shell-session
 $ convert -sample 10% original.jpg sample.jpg
+```
 
 10%になるようにピクセルを間引いたあと、1000%になるように拡大
 →元画像と同じサイズでモザイクがかかる
-$ convert -sample 10% -sample 1000% original.jpg sample.jpg
+
+```shell-session
+$ convert -sample 10% -sample 1000% original.jpg mosaic.jpg
 ```
 
 ### リサイズ (resize)
 
-```shell-session
 デフォルトではアスペクト比を変えない：指定した幅・高さに収まるようにリサイズされる
+
+```shell-session
 $ convert -resize 400x400 original.jpg resize.jpg
 $ identify resize.jpg
 resize.jpg JPEG 400x267 400x267+0+0 8-bit sRGB 37116B 0.000u 0:00.000
+```
 
-!をつけるとアスペクト比を無視して指定した値にリサイズする
+`!`をつけるとアスペクト比を無視して指定した値にリサイズする
+
+```shell-session
 $ convert -resize 400x400! original.jpg resize2.jpg
+```
 
 幅または高さのみ指定できる
+
+```shell-session
 $ convert -resize 400x original.jpg resize3.jpg
 ```
 
 ### エッジ検出 (edge)
 
-```shell-session
 不連続に変化している箇所を検出する
+
+```shell-session
 $ convert -edge 5 original.jpg edge.jpg
+```
 
 値を変化させてみよう
-$ convert -edge 10 original.jpg edge.jpg
 
-$ convert -edge 1 original.jpg edge.jpg
+```shell-session
+$ convert -edge 10 original.jpg edge2.jpg
+$ convert -edge 1 original.jpg edge3.jpg
 ```
 
 ### 切り抜き (crop)
 
-```shell-session
--gravityで基準点を指定
--crop widthxheightで切り抜くサイズを指定
-+/-で基準点からのx,y座標を指定
-$ convert -gravity center -crop 200x200+0+0 original.jpg crop.jpg
+`-gravity`で基準点を指定し、`-crop widthxheight`で切り抜くサイズを指定
 
+```shell-session
+$ convert -gravity center -crop 200x200+0+0 original.jpg crop.jpg
+```
+
+`+`/`-`で基準点からのx,y座標を指定できる
 画像右上を基準に、xに140px,yに50px移動し、その点から200x200px切り抜く
+
+```shell-session
 $ convert -gravity northeast -crop 200x200+140+50 original.jpg crop.jpg
 ```
 
 ### 塗り足し (extent)
 
-```shell-session
 指定したサイズになるように余白を追加する
-余白の色は-backgroundで指定できる
-正方形のサイズが必要なのに4:3の画像しかないとかに便利
+正方形のサイズが必要なのに4:3の画像しかないときなどに便利
+
+```shell-session
 $ convert -background black -gravity center \
           -extent 800x800 original.jpg extent.jpg
+```
 
-PNG(透過が扱えるフォーマット)であればtransparentで透過できる
+余白の色は`-background`で指定する
+PNG(透過が扱えるフォーマット)であれば`transparent`で透過できる
+
+```shell-session
 $ convert -background transparent -gravity north \
           -extent 1000x1000 original.jpg extent.png
 ```
@@ -187,23 +236,27 @@ $ convert -background transparent -gravity north \
 ```shell-session
 $ convert -background transparent \
           -fill '#ff6060' -font Arial -pointsize 128 label:LGTM lgtm.png
+```
 
 指定サイズで作成
+
+```shell-session
 $ convert -size 400x200 -gravity center -background transparent \
           -fill '#ff6060' -font Arial -pointsize 128 label:LGTM lgtm.png
 ```
 
 ### 合成 (composite)
 
-- ↑で作った文字の画像を使います
+`original.jpg`の上に`lgtm.png`を合成して、`compose-over.jpg`として出力
 
 ```shell-session
-original.jpgの上にlgtm.pngを合成して、compose-over.jpgとして出力
-
 $ convert original.jpg lgtm.png -gravity center \
           -compose over -composite compose-over.jpg
+```
 
--geometryで基準点から移動
+`-geometry`で基準点から移動
+
+```shell-session
 $ convert original.jpg lgtm.png -gravity center -geometry +150+50 \
           -compose over -composite compose-over.jpg
 ```
@@ -215,18 +268,25 @@ $ convert original.jpg lgtm.png -gravity center -geometry +150+50 \
 - Photoshopなどの画像編集ソフトにあるものと同様
 - 実際どんな計算で算出されるかはソースを読めばわかる…が、感覚をつかむには[GIMPのドキュメント](https://docs.gimp.org/2.8/ja/gimp-concepts-layer-modes.html)がわかりやすい
   - たとえば乗算は：合成画像の色 = 上側の色 * 下側の色 / 255
+- `-compose`で描画モードを指定する
+
+乗算 (multiply)
 
 ```shell-session
--composeで描画モードを指定する
-乗算 (multiply)
 $ convert original.jpg lgtm.png -gravity center -geometry +150+50 \
           -compose multiply -composite compose-multiply.jpg
+```
 
 オーバーレイ (overlay)
+
+```shell-session
 $ convert original.jpg lgtm.png -gravity center -geometry +150+50 \
           -compose overlay -composite compose-overlay.jpg
+```
 
 減算 (subtract)
+
+```shell-session
 $ convert original.jpg lgtm.png -gravity center -geometry +150+50 \
           -compose subtract -composite compose-subtract.jpg
 ```
