@@ -5,6 +5,7 @@ categories:
   - 技術
 tags:
   - Scrapbox
+  - チームビルディング
 ---
 
 この記事は[GMOペパボ Advent Calendar 2017](https://qiita.com/advent-calendar/2017/pepabo)の17日目……になる予定だった記事です。

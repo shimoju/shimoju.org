@@ -5,6 +5,7 @@ categories:
   - 技術
 tags:
   - コードレビュー
+  - チームビルディング
 ---
 
 この記事は[pepabo Advent Calendar 2016](http://qiita.com/advent-calendar/2016/pepabo)の4日目です。
