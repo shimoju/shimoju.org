@@ -1,5 +1,5 @@
 ---
-title: Scrapboxでリアルタイム共同日報を導入してみた
+title: Scrapboxでリアルタイム共同日報をやってみた
 date: 2017-12-31 08:00:00
 categories:
   - 技術
