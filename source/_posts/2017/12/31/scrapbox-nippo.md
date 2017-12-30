@@ -1,5 +1,6 @@
 ---
 title: Scrapboxで共同日報を書く
+date: 2017-12-31 08:00:00
 categories:
   - 技術
 tags:
