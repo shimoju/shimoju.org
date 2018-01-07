@@ -86,6 +86,11 @@ feed:
   path: feed.xml
   limit: 20
 
+# Sitemap
+## Docs: https://github.com/hexojs/hexo-generator-sitemap
+sitemap:
+  path: sitemap.xml
+
 # Markdown
 ## Docs: https://github.com/hexojs/hexo-renderer-marked
 marked:
