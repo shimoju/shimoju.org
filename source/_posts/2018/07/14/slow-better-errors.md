@@ -8,7 +8,7 @@ tags:
 ---
 
 [better_errors](https://github.com/charliesome/better_errors)が入ったRailsプロジェクトを最近触っているのですが、エラー画面の表示がやたら遅く、コンソールが使い物にならない状態になっていました。
-[Puma 3系で発生しており](https://github.com/charliesome/better_errors/issues/341)、リクエスト・レスポンス変数内の`puma.config`のデータ量が非常に大きく、通信に時間がかかってしまっているからのようです。
+[Puma 3系で発生しており](https://github.com/charliesome/better_errors/issues/341)、リクエスト・レスポンス変数内の`puma.config`のサイズが非常に大きく、通信に時間がかかってしまっているからのようです。
 
 この対策として、最新バージョンの2.4.0(2017年10月リリース)で[サイズの大きいインスタンス変数をフィルタする機能](https://github.com/charliesome/better_errors#set-maximum-variable-size-for-inspector)が追加されていました。フィルタ設定はデフォルトで有効なので、最新版にアップデートすればいい感じになります。
 
