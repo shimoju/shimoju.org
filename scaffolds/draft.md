@@ -1,6 +1,6 @@
 ---
 title: {{ title }}
 categories:
-  - 日記
+  - 技術
 tags:
 ---
