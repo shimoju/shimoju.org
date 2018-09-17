@@ -30,7 +30,8 @@ end
 
 任意のタスクのあとに別のタスクを実行するため、[Rake::Task#enhance](https://docs.ruby-lang.org/ja/latest/method/Rake=3a=3aTask/i/enhance.html)を使っています。ドキュメントには「自身に事前タスクとアクションを追加します。」としか書かれておらず使い方がわかりにくいですが、[enhanceの引数に指定したタスクは事前に実行され、ブロック内に記述したタスクは事後に実行されます](https://www.hsbt.org/diary/20120210.html)。
 
-Herokuへのデプロイ時には`assets:precompile`が毎回実行されるので、`Rake::Task['assets:precompile'].enhance`とすることで、デプロイ時に任意のタスクを実行できるようになります。ここで郵便番号データを更新するようにしました。`assets:precompile`以外のタスクでも同じように使えます。
+Herokuへのデプロイ時には`assets:precompile`が毎回実行されるので、`Rake::Task['assets:precompile'].enhance`とすることで、デプロイ時に任意のタスクを実行できるようになります。ここで郵便番号データを更新するようにしました。
+郵便番号データ更新に限らず、デプロイ時に実行したい処理があれば同じように書けます。
 
 更新にかかる時間は約20秒でした。少し時間はかかりますが、デプロイのたびに最新の郵便番号データを含めることができるので安心ですね。
 
